@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     state: String,
     country: String,
   },
-  loginId: Number,
+  loginId: String,
   password: String,
   creationTime: Date,
   lastUpdatedOn: Date,
