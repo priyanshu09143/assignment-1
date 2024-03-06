@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  
+    <div id="users"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch and display users
+            async function fetchUsers() {
+                const response = await $.get('/api/users');
+                let usersHTML = '';
+                response.forEach(user => {
+                    usersHTML += `
+                        <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
+                        <p><strong>Mobile no:</strong> ${user.mobileNo}</p>
+                        <p><strong>Email id:</strong> ${user.emailId}</p>
+                        <p><strong>Address:</strong> ${user.address.street}, ${user.address.city}, ${user.address.state}, ${user.address.country}</p>
+                        <p><strong>Login id:</strong> ${user.loginId}</p>
+                        <p><strong>Creation Time:</strong> ${new Date(user.creationTime).toLocaleString()}</p>
+                        <p><strong>Last Updated On:</strong> ${new Date(user.lastUpdatedOn).toLocaleString()}</p>
+                        <hr>
+                    `;
+                });
+                // It will return HTML to #user Empty field 
+                $('#users').html(usersHTML);
+            }
+            fetchUsers();
+        });
+    </script>
+</body>
+</html>
